@@ -1,0 +1,9 @@
+//Reading data from text file
+val order = sc.textFile("/FileStore/tables/part_00000-6a99e") //Create RDD by reading text file
+order.take(10) //Display 10 vlaues of RDD order
+val a=(1 to 100).toList //Create list
+val aRDD=sc.parallelize(a) //Create RDD by parallelizing
+a.take(10) //Display 10 values of list
+aRDD.take(10) //Display 10 values of RDD
+val c=a.patch(2, Seq(5),1) //Alter values of list and store it in c list
+order.take(10)
