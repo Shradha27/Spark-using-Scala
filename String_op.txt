@@ -1,0 +1,14 @@
+//String operations
+val str1=order.first //Creates string having first row of order RDD
+str1.split(",") //Splits into array
+val str=order.toDF //Converts RDD into DF
+str.first //Shows first row of DF
+order.first //Shows first row of RDD (string)
+val b=order.first.split(",") //Splits first row of RDD
+b(0) //Displays first element of array
+b(0).contains("1") //Checks if string has "1"
+b(1).substring(0,10) //Display 0-9
+b(1).substring(2) //Displays 2-end
+b(1).replace('0','4') //Character
+b(1).replace("00","0") //CharSequence
+b(1).indexOf("1",2) //Gives position of second occurence of 1
