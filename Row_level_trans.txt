@@ -1,0 +1,12 @@
+//Row level transformations using map on text file (Map-> Condition on columns, Vertical)
+order.take(10).foreach(println)
+val orderDates=order.map(str=>{
+  str.split(",")(1).substring(0,10).replace("-","").toInt
+}) //Map function to display date in 20130725 format
+orderDates.take(10).foreach(println)
+val order_pairs=order.map(str=>{
+  val o=str.split(",")
+  (o(0).toInt,o(1).substring(0,10).replace("-","").toInt)
+}) //Map function for key value pairs
+order_pairs.take(10).foreach(println)
+order_pairs.collect.foreach(println) //Prints all outputs
