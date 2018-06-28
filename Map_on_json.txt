@@ -1,0 +1,15 @@
+//Combine order and order_items using row level transformations on json file
+val order_items=sc.textFile("/FileStore/tables/part_r_00000_6b83977e_3f20_404b_9b5f_29376ab1419e-9d0b8")
+order_items.take(2).foreach(println)
+val order_items_pairs=order_items.map(str=>{
+  val o=str.split(",")
+  (o(1).substring(o(1).indexOf(":")+1).toInt,
+   o(0).substring(o(0).indexOf(":")+1).toInt,
+   o(1).substring(o(1).indexOf(":")+1).toInt,
+   o(2).substring(o(2).indexOf(":")+1).toInt,
+   o(3).substring(o(3).indexOf(":")+1).toInt,
+   o(4).substring(o(4).indexOf(":")+1).toFloat,
+   o(5).substring(o(5).indexOf(":")+1,o(5).indexOf("}")).toFloat)
+}) //Map function for key value pairs
+order_items_pairs.take(10).foreach(println)
+order_items_pairs
