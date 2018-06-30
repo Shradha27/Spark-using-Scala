@@ -1,0 +1,9 @@
+//Row level transformations using flatMap
+val list=List("Hello","Let us perform word count","We will see how many times each word repeat")
+val list_RDD = sc.parallelize(list)
+val flatmap_list=list_RDD.flatMap(str=>str.split(" ")) //Split words using flatMap
+val map_list=list_RDD.map(str=>str.split(" ")) //Split words using map, prints address of strings
+flatmap_list.collect.foreach(println) //Returns String
+map_list.take(3).foreach(println) //Returns array[String]
+val wc=flatmap_list.map(str=>(str,"")).countByKey //Convert flatMap output to map to get tuples, countByKey applied on tuples only
+wc.take(10).foreach(println)
