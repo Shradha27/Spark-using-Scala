@@ -1,0 +1,23 @@
+//Joining order and order_items
+val order_items=sc.textFile("/FileStore/tables/part_00001-f7f45")
+order_items.take(10).foreach(println)
+order.take(10).foreach(println)
+val order_pair=order.map(str=>{
+  val o=str.split(",")
+  (o(0).toInt,o(1).substring(0,10))
+}) //Map for getting key value pairs
+order_pair.take(10).foreach(println)
+val order_items_pair=order_items.map(str=>{
+  val o=str.split(",")
+  (o(1).toInt,o(4).toFloat)
+}) //Map for getting key value pairs
+order_items_pair.take(10).foreach(println)
+val join=order_pair.leftOuterJoin(order_items_pair)
+join.take(10).foreach(println)
+join.count
+val joinfilter=join.filter(str=>{
+  str.toString.contains("None")
+}) //Filter order items having no orders
+joinfilter.take(10).foreach(println)
+val t=join.first
+t._2._2 //Displays second sub column of second column
