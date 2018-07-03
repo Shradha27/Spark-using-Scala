@@ -1,0 +1,8 @@
+//Aggregation - Using actions (map and reduce)
+val count_status=order.map(str=>(str.split(",")(3),"")).countByKey.foreach(println) //countByKey
+val revenue=order_items.map(str=>(str.split(",")(4).toFloat)) //Sum revenues of all orders
+revenue.take(10).foreach(println)
+val total_revenue=revenue.reduce((total,revenue)=>total+revenue)
+val max=revenue.reduce((max,revenue)=>{
+  if(max>revenue) max else revenue
+}) //Calculate max revenue
