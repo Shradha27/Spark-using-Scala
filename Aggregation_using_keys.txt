@@ -1,0 +1,19 @@
+//Aggregation - Using groupByKey, reduceByKey, aggregateByKey
+
+//groupByKey :
+order_items.take(10).foreach(println)
+val paired_order_items=order_items.map(str=>{
+  (str.split(",")(1).toInt,str.split(",")(4).toFloat)
+}) //Map to get key value pairs of order id,revenue
+paired_order_items.take(10).foreach(println)
+val order_items_GBK=paired_order_items.groupByKey //groupByKey to list all revenues per key
+order_items_GBK.take(10).foreach(println)
+val totalrev_per_key=order_items_GBK.map(str=>(str._1.toInt,str._2.toList.sum)).take(10).foreach(println) //Sum of all revenues per key
+val sorted=order_items_GBK.flatMap(item=>{
+  (item._2.toList.sortBy(o => -o).map(it=>(item._1,it)))
+})
+sorted.take(10).foreach(println)
+
+//reduceByKey :
+val minrevenue=paired_order_items.reduceByKey((min,item)=>if(min < item) min else item)
+minrevenue.take(10).foreach(println)
